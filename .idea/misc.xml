@@ -3,12 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/mp/RunningLife/app/src/main/res/layout/activity_main.xml" value="0.2246376811594203" />
-        <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_daily.xml" value="0.2545289855072464" />
-        <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
-        <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_monthly.xml" value="0.25364583333333335" />
-        <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_my_page.xml" value="0.25364583333333335" />
-        <entry key="..\:/mp/RunningLife/app/src/main/res/menu/menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/app/src/main/res/drawable/bg_color.xml" value="0.2" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/app/src/main/res/layout/background_gradient.xml" value="0.14266304347826086" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/app/src/main/res/layout/daily_schedule.xml" value="0.14266304347826086" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/app/src/main/res/layout/home_page.xml" value="0.22" />
+        <entry key="..\:/Users/Seo/Desktop/RunningLife/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Seo/Desktop/RunningLife/app/src/main/res/layout/fragment_daily.xml" value="0.1" />
+        <entry key="..\:/Users/Seo/Desktop/RunningLife/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/Seo/Desktop/RunningLife/app/src/main/res/layout/fragment_monthly.xml" value="0.12447916666666667" />
+        <entry key="..\:/Users/Seo/Desktop/RunningLife/app/src/main/res/layout/fragment_my_page.xml" value="0.12447916666666667" />
       </map>
     </option>
   </component>

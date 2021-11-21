@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/RunningLife/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/RunningLife/app/src/main/res/layout/activity_main.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/RunningLife/app/src/main/res/layout/fragment_daily.xml" value="0.13958333333333334" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/RunningLife/app/src/main/res/layout/fragment_home.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/RunningLife/app/src/main/res/layout/fragment_monthly.xml" value="0.2847141190198366" />
         <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/app/src/main/res/drawable/bg_color.xml" value="0.2" />
         <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/app/src/main/res/layout/background_gradient.xml" value="0.14266304347826086" />

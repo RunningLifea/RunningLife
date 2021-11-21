@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/home"
+        android:title="home" />
+    <item
+        android:id="@+id/daily"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/daily"
+        android:title="daily" />
+    <item
+        android:id="@+id/monthly"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/monthly"
+        android:title="monthly" />
+    <item
+        android:id="@+id/mypage"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/mypage"
+        android:title="mypage" />
+</menu>

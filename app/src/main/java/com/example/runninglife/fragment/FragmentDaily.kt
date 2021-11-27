@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -15,13 +16,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.runninglife.DAO.WeatherResponse
+import com.example.runninglife.dao.WeatherResponse
 import com.example.runninglife.R
+import com.example.runninglife.adapter.DailyExpandableAdapter
+import com.example.runninglife.adapter.HorizontalRecyclerCalendarAdapter
+import com.example.runninglife.dao.Daily
 import com.example.runninglife.retrofit.WeatherService
 import com.google.android.gms.location.*
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
@@ -31,7 +37,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalTime
 import java.util.*
+import kotlin.collections.ArrayList
 
 class FragmentDaily : Fragment() {
 
@@ -42,6 +50,16 @@ class FragmentDaily : Fragment() {
         LocationServices.getFusedLocationProviderClient(activity)
     }
 
+    lateinit var img_weather: ImageView
+    lateinit var text_weather : TextView
+    lateinit var text_location : TextView
+
+    lateinit var geocoder: Geocoder
+
+    private lateinit var dailyList: List<Daily>
+    private lateinit var adapter: DailyExpandableAdapter
+
+
     @SuppressLint("NewApi")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +68,20 @@ class FragmentDaily : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_daily, container, false)
 
-        Log.d("test", "t")
+        val item_recycler_view = view.findViewById<RecyclerView>(R.id.item_recycler)
+        dailyList = ArrayList()
+        dailyList = loadData()
+
+        item_recycler_view.setHasFixedSize(true)
+        item_recycler_view.layoutManager = LinearLayoutManager(context)
+        adapter = DailyExpandableAdapter(dailyList)
+        item_recycler_view.adapter = adapter
+
+
+        img_weather = view.findViewById(R.id.img_weather)
+        text_weather = view.findViewById(R.id.text_weather)
+        text_location = view.findViewById(R.id.text_location)
+        geocoder = Geocoder(activity)
 
         //check location condition
         if (ContextCompat.checkSelfPermission(
@@ -123,7 +154,6 @@ class FragmentDaily : Fragment() {
                                 ?: ""
 
                         // 날짜 선택
-                        Log.d("test", date.toString())
                         getWeather(lat, lon)
                     }
 
@@ -137,6 +167,18 @@ class FragmentDaily : Fragment() {
 
 
         return view
+    }
+
+    private fun loadData(): List<Daily> {
+        val dailyList = ArrayList<Daily>()
+
+        val data1 = Daily("Mobile Programming", LocalTime.of(10,0,0), LocalTime.of(10,30,0), "prontier", 0, false)
+        val data2 = Daily("Running", LocalTime.of(13,0,0), LocalTime.of(13,30,0), "Han River", 19, false)
+
+        dailyList.add(data1)
+        dailyList.add(data2)
+
+        return dailyList
     }
 
     @SuppressLint("MissingPermission")
@@ -167,14 +209,14 @@ class FragmentDaily : Fragment() {
             // when location service is enabled
             // get last location
             client.lastLocation.addOnCompleteListener {
+                Log.d("test", it.result.toString())
                 val location: Location = it.result
                 // check condition
-                Log.d("test", location.latitude.toString())
                 if (location.latitude != 0.0 && location.longitude != 0.0) {
                     // when location result is not null
                     lat = location.latitude
                     lon = location.longitude
-                    Log.d("test", "loc1")
+                    getWeather(lat, lon)
                 } else {
                     // when location result is null
                     // initialize location request
@@ -193,7 +235,7 @@ class FragmentDaily : Fragment() {
 
                             lat = location1?.latitude!!
                             lon = location1.longitude
-                            Log.d("test", "loc2")
+                            getWeather(lat, lon)
                         }
                     }
 
@@ -205,8 +247,6 @@ class FragmentDaily : Fragment() {
                     )
                 }
             }
-            Log.d("test", "weather")
-            getWeather(lat, lon)
         } else {
             // when location service is not enabled
             // open location setting
@@ -228,9 +268,9 @@ class FragmentDaily : Fragment() {
         weatherService.getCurrentWeatherData(lat.toString(), lon.toString(),APPID).enqueue(object: Callback<WeatherResponse>{
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
                 //todo 실패처리
-                Log.d("test",t.toString())
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                 //todo 성공처리
 
@@ -238,12 +278,44 @@ class FragmentDaily : Fragment() {
                     return
                 }
                 response.body()?.let{
+                    val result_geo = geocoder.getFromLocation(lat, lon, 1)
+                    val result_loc = result_geo[0].getAddressLine(0).split(",")
+                    text_location.text = result_loc[result_loc.size-3] + ", " + result_loc[result_loc.size-2]
 
-                    Log.d("test", lat.toString())
-                    Log.d("test", lon.toString())
-                    Log.d("test", it.name.toString())
-                    Log.d("test",it.toString())
-                    Log.d("test", it.weather.toString())
+                    val weather = it.weather.get(index = 0).main
+                    when (weather.toString()) {
+                        "Clouds" -> {
+                            img_weather.setImageResource(R.drawable.clouds)
+                            text_weather.text = "Clouds"
+                        }
+                        "Clear" -> {
+                            img_weather.setImageResource(R.drawable.clear)
+                            text_weather.text = "Clear"
+                        }
+                        "Atmosphere" -> {
+                            img_weather.setImageResource(R.drawable.atmosphere)
+                            text_weather.text = "Atmosphere"
+                        }
+                        "Drizzle" -> {
+                            img_weather.setImageResource(R.drawable.drizzle)
+                            text_weather.text = "Drizzle"
+                        }
+                        "Rain" -> {
+                            img_weather.setImageResource(R.drawable.rain)
+                            text_weather.text = "Rain"
+                        }
+                        "Snow" -> {
+                            img_weather.setImageResource(R.drawable.snow)
+                            text_weather.text = "Snow"
+                        }
+                        "Thunderstorm" -> {
+                            img_weather.setImageResource(R.drawable.thunderstrom)
+                            text_weather.text = "Thunderstorm"
+                        }
+                        else -> {
+                            img_weather.setImageResource(R.drawable.loading)
+                        }
+                    }
                 }
             }
 

@@ -1,6 +1,6 @@
 package com.example.runninglife.retrofit
 
-import com.example.runninglife.DAO.WeatherResponse
+import com.example.runninglife.dao.WeatherResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

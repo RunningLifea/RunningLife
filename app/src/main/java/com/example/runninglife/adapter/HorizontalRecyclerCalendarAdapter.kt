@@ -1,4 +1,4 @@
-package com.example.runninglife.fragment
+package com.example.runninglife.adapter
 
 import android.content.Context
 import android.graphics.Color

@@ -2,6 +2,7 @@ package com.example.runninglife.fragment
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,6 +17,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -28,6 +30,7 @@ import com.example.runninglife.R
 import com.example.runninglife.adapter.DailyExpandableAdapter
 import com.example.runninglife.adapter.HorizontalRecyclerCalendarAdapter
 import com.example.runninglife.dao.Daily
+import com.example.runninglife.popup.PopupActivity
 import com.example.runninglife.retrofit.WeatherService
 import com.google.android.gms.location.*
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
@@ -67,6 +70,17 @@ class FragmentDaily : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_daily, container, false)
+
+        val btn_edit_schedule = view.findViewById<Button>(R.id.btn_edit_schedule)
+        btn_edit_schedule.setOnClickListener {
+            //데이터 담아서 팝업(액티비티) 호출
+            val popup = Intent(activity, PopupActivity::class.java)
+            popup.putExtra("data", "Test Popup");
+            startActivityForResult(popup, 1);
+
+        }
+
+
 
         val item_recycler_view = view.findViewById<RecyclerView>(R.id.item_recycler)
         dailyList = ArrayList()
@@ -167,6 +181,17 @@ class FragmentDaily : Fragment() {
 
 
         return view
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode==1){
+            if(resultCode==Activity.RESULT_OK){
+                //데이터 받기
+                val result = data?.getStringExtra("result");
+                Log.d("test", "popup")
+            }
+        }
+
     }
 
     private fun loadData(): List<Daily> {

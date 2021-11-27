@@ -37,11 +37,11 @@
         android:layout_marginBottom="20dp"
         android:text="week1"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/w1"
+        app:layout_constraintEnd_toStartOf="@+id/w1_bar"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
-        android:id="@+id/w1"
+        android:id="@+id/w1_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="270dp"
         android:layout_height="40dp"
@@ -49,11 +49,11 @@
         android:max="100"
         android:paddingHorizontal="20dp"
         android:progress="10"
-        app:layout_constraintBottom_toTopOf="@+id/w"
+        app:layout_constraintBottom_toTopOf="@+id/w2_bar"
         app:layout_constraintStart_toStartOf="@+id/calendarView2" />
 
     <ProgressBar
-        android:id="@+id/w"
+        android:id="@+id/w2_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="270dp"
         android:layout_height="40dp"
@@ -61,12 +61,12 @@
         android:max="100"
         android:paddingHorizontal="20dp"
         android:progress="10"
-        app:layout_constraintBottom_toTopOf="@+id/w2"
-        app:layout_constraintEnd_toEndOf="@+id/w1"
+        app:layout_constraintBottom_toTopOf="@+id/w3_bar"
+        app:layout_constraintEnd_toEndOf="@+id/w1_bar"
         app:layout_constraintStart_toStartOf="@+id/calendarView2" />
 
     <ProgressBar
-        android:id="@+id/w2"
+        android:id="@+id/w3_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="270dp"
         android:layout_height="40dp"
@@ -74,12 +74,12 @@
         android:max="100"
         android:paddingHorizontal="20dp"
         android:progress="10"
-        app:layout_constraintBottom_toTopOf="@+id/w3"
-        app:layout_constraintEnd_toEndOf="@+id/w"
+        app:layout_constraintBottom_toTopOf="@+id/w4_bar"
+        app:layout_constraintEnd_toEndOf="@+id/w2_bar"
         app:layout_constraintStart_toStartOf="@+id/calendarView2" />
 
     <ProgressBar
-        android:id="@+id/w3"
+        android:id="@+id/w4_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="270dp"
         android:layout_height="40dp"
@@ -89,7 +89,7 @@
         android:paddingHorizontal="20dp"
         android:progress="10"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/w2"
+        app:layout_constraintEnd_toEndOf="@+id/w3_bar"
         app:layout_constraintStart_toStartOf="@+id/calendarView2" />
 
     <TextView
@@ -99,7 +99,7 @@
         android:layout_marginBottom="20dp"
         android:text="week2"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toStartOf="@+id/w"
+        app:layout_constraintEnd_toStartOf="@+id/w2_bar"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -109,7 +109,7 @@
         android:layout_marginBottom="20dp"
         android:text="week3"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toStartOf="@+id/w2"
+        app:layout_constraintEnd_toStartOf="@+id/w3_bar"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -119,7 +119,7 @@
         android:layout_marginBottom="50dp"
         android:text="week4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/w3"
+        app:layout_constraintEnd_toStartOf="@+id/w4_bar"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -154,7 +154,7 @@
         android:layout_width="302dp"
         android:layout_height="81dp"
         android:layout_marginBottom="9dp"
-        app:layout_constraintBottom_toTopOf="@+id/w1"
+        app:layout_constraintBottom_toTopOf="@+id/w1_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bluebox" />

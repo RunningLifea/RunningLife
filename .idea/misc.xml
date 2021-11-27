@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/RunningLife/app/src/main/res/layout/fragment_monthly.xml" value="0.27262044653349" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/drawable/bg_color.xml" value="0.14583333333333334" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/drawable/border_bottom.xml" value="0.14583333333333334" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/drawable/bottom_stork.xml" value="0.14583333333333334" />
@@ -14,10 +13,11 @@
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/daily_date.xml" value="0.75" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_daily.xml" value="0.22" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_home.xml" value="0.136" />
-        <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_monthly.xml" value="0.25364583333333335" />
+        <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_monthly.xml" value="0.46768507638072854" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/fragment_my_page.xml" value="0.25364583333333335" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/item_calendar_horizontal.xml" value="0.33" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/item_daily.xml" value="0.25" />
+        <entry key="..\:/mp/RunningLife/app/src/main/res/layout/popup_daily.xml" value="0.20729166666666668" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/menu/menu.xml" value="0.25364583333333335" />
       </map>
     </option>

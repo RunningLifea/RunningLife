@@ -1,15 +1,27 @@
 package com.example.runninglife.fragment
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.runninglife.DAO.runRecord
+import com.example.runninglife.DayViewContainer
+import com.example.runninglife.MonthViewContainer
 import com.example.runninglife.R
+import com.kizitonwose.calendarview.CalendarView
+import com.kizitonwose.calendarview.model.CalendarDay
+import com.kizitonwose.calendarview.model.CalendarMonth
+import com.kizitonwose.calendarview.model.DayOwner
+import com.kizitonwose.calendarview.ui.DayBinder
+import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import com.kizitonwose.calendarview.utils.Size
+import java.time.DayOfWeek
+import java.time.YearMonth
+import java.time.temporal.WeekFields
+import java.util.*
 
 
 class FragmentMonthly : Fragment() {
@@ -18,17 +30,52 @@ class FragmentMonthly : Fragment() {
         savedInstanceState:Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_monthly, container, false)
-        val date = view.findViewById<TextView>(R.id.select_date)
+
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView2)
-        var distance = view.findViewById<TextView>(R.id.distance)
-        val bar1 = view.findViewById<ProgressBar>(R.id.w1_bar)
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            date.text = ""+year+"년 "+ month+"월 "+dayOfMonth+"일"
-            val data211122 = runRecord(2021, 11, 22, 4)
-            val sumOfDist = data211122.dist
-            distance.text = data211122.dist.toString() + "km"
-            bar1.progress = sumOfDist
+
+        calendarView.dayBinder = object : DayBinder<DayViewContainer> {
+            // Called only when a new container is needed.
+            override fun create(view: View) = DayViewContainer(view)
+
+            // Called every time we need to reuse a container.
+            @SuppressLint("SetTextI18n")
+            override fun bind(container: DayViewContainer, day: CalendarDay) {
+                // 데이터 불러와서 키로수 뒤에 붙여주기
+                container.textView.text = day.date.dayOfMonth.toString() + "\n 12km"
+                if (day.owner == DayOwner.THIS_MONTH) {
+                    container.textView.setTextColor(Color.BLACK)
+                } else {
+                    container.textView.setTextColor(Color.GRAY)
+                }
+            }
         }
+
+        calendarView.monthHeaderBinder = object : MonthHeaderFooterBinder<MonthViewContainer>{
+
+            override fun bind(container: MonthViewContainer, month: CalendarMonth) {
+                container.textView.text = "${month.yearMonth.month.name.toLowerCase().capitalize()} ${month.year}"
+            }
+
+            override fun create(view: View) =  MonthViewContainer (view)
+        }
+
+        val currentMonth = YearMonth.now()
+        val firstMonth = currentMonth.minusMonths(10)
+        val lastMonth = currentMonth.plusMonths(10)
+        val daysOfWeek = arrayOf(
+            DayOfWeek.SUNDAY,
+            DayOfWeek.MONDAY,
+            DayOfWeek.TUESDAY,
+            DayOfWeek.WEDNESDAY,
+            DayOfWeek.THURSDAY,
+            DayOfWeek.FRIDAY,
+            DayOfWeek.SATURDAY
+        )
+        calendarView.setup(firstMonth, lastMonth, daysOfWeek.first())
+        calendarView.scrollToMonth(currentMonth)
+
+
+
         return view
     }
 

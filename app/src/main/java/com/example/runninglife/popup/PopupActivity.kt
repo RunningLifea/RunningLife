@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.example.runninglife.R
 
@@ -12,12 +14,15 @@ class PopupActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.popup_daily)
 
-        val text = findViewById<TextView>(R.id.txtText)
+        val text = findViewById<EditText>(R.id.edit_title)
 
         val data = intent.getStringExtra("data")
-        text.text = data
+
+
 
         val btn_daily_dialog = findViewById<Button>(R.id.btn_daily_dialog)
         btn_daily_dialog.setOnClickListener {

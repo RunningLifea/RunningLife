@@ -3,9 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.2359375" />
         <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/RunningLife/app/src/main/res/drawable/bg_color.xml" value="0.1" />
         <entry key="..\:/Users/Seo/Desktop/Mobile Program/RunningLife/RunningLife/app/src/main/res/layout/fragment_monthly.xml" value="0.27262044653349" />
-
         <entry key="..\:/mp/RunningLife/app/src/main/res/drawable/bg_color.xml" value="0.14583333333333334" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/drawable/border_bottom.xml" value="0.14583333333333334" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/drawable/bottom_stork.xml" value="0.14583333333333334" />
@@ -19,8 +19,17 @@
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/item_calendar_horizontal.xml" value="0.33" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/item_daily.xml" value="0.25" />
         <entry key="..\:/mp/RunningLife/app/src/main/res/layout/popup_daily.xml" value="0.20729166666666668" />
-
         <entry key="..\:/mp/RunningLife/app/src/main/res/menu/menu.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/drawable/layout_round_corner_filled_white.xml" value="0.228125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/calendar_day_layout.xml" value="0.2203125" />
+        <entry key="app/src/main/res/layout/calendar_month_layout.xml" value="0.2203125" />
+        <entry key="app/src/main/res/layout/fragment_daily.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/layout/fragment_monthly.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/layout/item_calendar_horizontal.xml" value="0.22291666666666668" />
+        <entry key="app/src/main/res/layout/item_daily.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/popup_daily.xml" value="0.55" />
       </map>
     </option>
   </component>

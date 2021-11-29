@@ -234,7 +234,7 @@ class FragmentDaily : Fragment() {
             // when location service is enabled
             // get last location
             client.lastLocation.addOnCompleteListener {
-                Log.d("test", it.result.toString())
+                if (it.result != null) {
                 val location: Location = it.result
                 // check condition
                 if (location.latitude != 0.0 && location.longitude != 0.0) {
@@ -242,23 +242,24 @@ class FragmentDaily : Fragment() {
                     lat = location.latitude
                     lon = location.longitude
                     getWeather(lat, lon)
+                }
                 } else {
                     // when location result is null
                     // initialize location request
+
                     var locationRequest = LocationRequest.create()
                     locationRequest.run {
                         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-                        interval = 10
+                        interval = 10000
                         fastestInterval = 1000
                         numUpdates = 1
                     }
 
                     // initialize location call back
                     val locationCallback = object : LocationCallback() {
-                        override fun onLocationResult(locationResult: LocationResult?) {
-                            val location1 = locationResult?.lastLocation
-
-                            lat = location1?.latitude!!
+                        override fun onLocationResult(locationResult: LocationResult) {
+                            val location1 = locationResult.lastLocation
+                            lat = location1.latitude
                             lon = location1.longitude
                             getWeather(lat, lon)
                         }
@@ -308,6 +309,8 @@ class FragmentDaily : Fragment() {
                     text_location.text = result_loc[result_loc.size-3] + ", " + result_loc[result_loc.size-2]
 
                     val weather = it.weather.get(index = 0).main
+                    Log.d("test", weather.toString())
+
                     when (weather.toString()) {
                         "Clouds" -> {
                             img_weather.setImageResource(R.drawable.clouds)
@@ -317,7 +320,7 @@ class FragmentDaily : Fragment() {
                             img_weather.setImageResource(R.drawable.clear)
                             text_weather.text = "Clear"
                         }
-                        "Atmosphere" -> {
+                        "Haze", "Mist", "Smoke", "Dust", "Fog", "Sand", "Ash", "Squall", "Tornado" ,"Atmosphere" -> {
                             img_weather.setImageResource(R.drawable.atmosphere)
                             text_weather.text = "Atmosphere"
                         }

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".MainActivity">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -16,111 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/human" />
-
-    <com.kizitonwose.calendarview.CalendarView
-
-        android:id="@+id/calendarView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        app:cv_dayViewResource="@layout/calendar_day_layout"
-        app:cv_monthHeaderResource="@layout/calendar_month_layout"
-        app:cv_orientation="horizontal"
-        app:cv_scrollMode="paged"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="41dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="20dp"
-        android:text="week1"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/w1_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="270dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:max="100"
-        android:paddingHorizontal="20dp"
-        android:progress="10"
-        app:layout_constraintBottom_toTopOf="@+id/w2_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
-
-    <ProgressBar
-        android:id="@+id/w2_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="270dp"
-        android:layout_height="40dp"
-        android:max="100"
-        android:paddingHorizontal="20dp"
-        android:progress="10"
-        app:layout_constraintBottom_toTopOf="@+id/w3_bar"
-        app:layout_constraintEnd_toEndOf="@+id/w1_bar"
-        app:layout_constraintStart_toStartOf="@+id/w1_bar" />
-
-    <ProgressBar
-        android:id="@+id/w3_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="270dp"
-        android:layout_height="40dp"
-        android:max="100"
-        android:paddingHorizontal="20dp"
-        android:progress="10"
-        app:layout_constraintBottom_toTopOf="@+id/w4_bar"
-        app:layout_constraintEnd_toEndOf="@+id/w2_bar"
-        app:layout_constraintStart_toStartOf="@+id/w2_bar" />
-
-    <ProgressBar
-        android:id="@+id/w4_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="270dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
-        android:max="100"
-        android:paddingHorizontal="20dp"
-        android:progress="10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/w3_bar"
-        app:layout_constraintStart_toStartOf="@+id/w3_bar" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="20dp"
-        android:text="week2"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="20dp"
-        android:text="week3"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="30dp"
-        android:text="week4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView
@@ -136,4 +36,22 @@
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.kizitonwose.calendarview.CalendarView
+        android:id="@+id/calendarView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        app:cv_dayViewResource="@layout/calendar_day_layout"
+        app:cv_monthFooterResource="@layout/calendar_footer_layout"
+        app:cv_monthHeaderResource="@layout/calendar_month_layout"
+        app:cv_orientation="horizontal"
+        app:cv_scrollMode="paged"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="0.000" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

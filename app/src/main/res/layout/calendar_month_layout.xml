@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TextView
         android:id="@+id/calendarMonthText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,57 +19,51 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal">
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <TextView
             android:id="@+id/sun"
-            android:layout_width="54dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:text="Sun" />
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <TextView
             android:id="@+id/mon"
-            android:layout_width="54dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:text="Mon" />
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <TextView
             android:id="@+id/tue"
-            android:layout_width="54dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:text="Tue" />
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <TextView
             android:id="@+id/wed"
-            android:layout_width="54dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:text="Wed" />
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <TextView
             android:id="@+id/thu"
-            android:layout_width="54dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:text="Thu" />
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <TextView
             android:id="@+id/fri"
-            android:layout_width="54dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:text="Fri" />
@@ -79,7 +72,7 @@
             android:id="@+id/sat"
             android:layout_width="58dp"
             android:layout_height="wrap_content"
-            android:text="Sat "
+            android:text="Sat"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp" />

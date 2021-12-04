@@ -20,7 +20,8 @@
         <Spinner
             android:id="@+id/progress_spinner"
             android:paddingHorizontal="5dp"
-            android:layout_width="100dp"
+            android:background="@drawable/spinner_arrow"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"/>
 
         <FrameLayout

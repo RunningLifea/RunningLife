@@ -2,13 +2,18 @@ package com.example.runninglife.fragment
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
+import androidx.annotation.Dimension
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.runninglife.DayViewContainer
 import com.example.runninglife.MonthFooterContainer
@@ -21,6 +26,7 @@ import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import org.w3c.dom.Text
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -86,7 +92,8 @@ class FragmentMonthly : Fragment() {
                 if (i == "6") {
                     items.add("Week 6")
                 }
-                val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
+                val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, items)
+
                 val spinner = container.spinner
                 spinner.adapter = spinnerAdapter
                 spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -96,6 +103,13 @@ class FragmentMonthly : Fragment() {
                         position: Int,
                         id: Long
                     ) {
+
+                        val selectedText : TextView? = parent?.findViewById(R.id.spinner_text)
+                        selectedText?.typeface = Typeface.DEFAULT_BOLD
+                        selectedText?.setTextSize(Dimension.SP, 20F)
+                        selectedText?.setPadding(90,0,0,0)
+
+
                         when(position) {
                             0 ->{
                                 Log.d("test", "week1")

@@ -32,5 +32,43 @@ class SignUpActivity : AppCompatActivity() {
             val mainIntent = Intent(this, MainActivity::class.java)
             startActivity(mainIntent)
         }
+        val dist_plus = findViewById<ImageView>(R.id.dist_plus)
+        var howlong = findViewById<TextView>(R.id.howlong)
+        var target_dist: Int = Integer.parseInt(howlong.text.toString())
+        val dist_minus = findViewById<ImageView>(R.id.dist_minus)
+
+
+        dist_plus.setOnClickListener {
+            if (target_dist >= 1) {
+                target_dist -= 1
+                howlong.text = target_dist.toString()
+
+            }
+            dist_minus.setOnClickListener {
+                target_dist += 1
+                howlong.text = target_dist.toString()
+            }
+
+
+        }
+        val time_plus = findViewById<ImageView>(R.id.time_plus)
+        var howmany = findViewById<TextView>(R.id.howmany)
+        var target_time: Int = Integer.parseInt(howmany.text.toString())
+        val time_minus = findViewById<ImageView>(R.id.time_minus)
+
+        time_plus.setOnClickListener {
+            if (target_time >= 1) {
+                target_time -= 1
+                howmany.text = target_time.toString()
+
+            }
+            time_minus.setOnClickListener {
+                target_time += 1
+                howmany.text = target_time.toString()
+            }
+
+
+        }
+
     }
 }

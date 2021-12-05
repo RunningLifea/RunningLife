@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <ImageView
-            android:id="@+id/dist_neg"
+            android:id="@+id/time_neg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -42,15 +42,15 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="6"
             android:textColor="@color/black"
             android:textSize="40sp"
-            android:textStyle="bold"
 
-            />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"
@@ -58,7 +58,7 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/imageView18"
+            android:id="@+id/time_pos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -120,7 +120,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <ImageView
-            android:id="@+id/dist_neg2"
+            android:id="@+id/dist_neg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -133,15 +133,15 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="16"
             android:textColor="@color/black"
             android:textSize="40sp"
-            android:textStyle="bold"
 
-            />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"
@@ -149,7 +149,7 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/dist_pos2"
+            android:id="@+id/dist_pos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

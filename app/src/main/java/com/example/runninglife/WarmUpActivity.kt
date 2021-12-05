@@ -1,16 +1,13 @@
 package com.example.runninglife
 
-import android.media.Image
+
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.view.circulartimerview.CircularTimerListener
 import com.view.circulartimerview.CircularTimerView
 import com.view.circulartimerview.TimeFormatEnum
-import kotlin.math.ceil
 
 
 class WarmUpActivity : AppCompatActivity() {
@@ -22,9 +19,11 @@ class WarmUpActivity : AppCompatActivity() {
         var state = true
 
         var i = 0
-        val warmUpList = listOf<String>("Stretch your legs!", "Hamstring warming up!", "test1", "test2")
+        val warmUpList = listOf<String>( "Stretch your legs!", "Stretch your arms!", "Waist warming up!", "Hamstring warming up!")
         val subtitle = findViewById<TextView>(R.id.subtitle_warming_up)
         val next = findViewById<TextView>(R.id.text_next)
+        val photo = findViewById<ImageView>(R.id.warmup1)
+        val imgList = listOf(R.drawable.warm_up1, R.drawable.arm, R.drawable.waist, R.drawable.ham)
 
         val  progressBar = findViewById<CircularTimerView>(R.id.progress_circular)
         progressBar.progress = 0F
@@ -50,12 +49,14 @@ class WarmUpActivity : AppCompatActivity() {
                     subtitle.text = warmUpList.get(i)
                     progressBar.setText("NEXT !!")
                     next.text = warmUpList.get(i+1)
+                    photo.setImageResource(imgList.get(i))
+
                 }
 
                 play.setImageResource(R.drawable.warm_up_play)
                 state = true
             }
-        }, 10, TimeFormatEnum.SECONDS, 10)
+        }, 3, TimeFormatEnum.SECONDS, 3)
 
 
         // To start timer

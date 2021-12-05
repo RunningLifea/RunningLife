@@ -20,16 +20,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/warmup1"
+        android:layout_width="355dp"
+        android:layout_height="191dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="28dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_warming_up"
-        app:srcCompat="@drawable/warm_up1" />
+        android:src="@drawable/warm_up1" />
 
     <TextView
         android:id="@+id/subtitle_warming_up"
@@ -42,7 +43,7 @@
         android:textSize="24sp"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/warmup1" />
 
     <FrameLayout
         android:id="@+id/timer"
@@ -93,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:text="Hamstring warming up"
+        android:text="Stretch your arms!"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

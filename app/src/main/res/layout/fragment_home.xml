@@ -13,7 +13,7 @@
     android:layout_height="wrap_content">
 
     <ImageButton
-        android:id="@+id/imageView"
+        android:id="@+id/setgoal"
         android:layout_width="0dp"
         android:layout_height="103dp"
         android:layout_marginStart="20dp"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/setgoal"
         app:srcCompat="@drawable/box2" />
 
     <ImageView
@@ -78,7 +78,7 @@
         app:srcCompat="@drawable/just2" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/daily_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="251dp"

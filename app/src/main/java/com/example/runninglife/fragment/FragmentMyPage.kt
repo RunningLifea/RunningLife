@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.runninglife.R
 
@@ -12,7 +14,18 @@ class FragmentMyPage : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState:Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_my_page, container, false)
+        val view = inflater.inflate(R.layout.fragment_my_page, container, false)
+        val editName = view.findViewById<TextView>(R.id.editName)
+        val edit_btn = view.findViewById<ImageView>(R.id.edit_btn)
+        val realName = view.findViewById<TextView>(R.id.realName)
 
+
+        edit_btn.setOnClickListener{
+            editName.visibility = View.VISIBLE
+            realName.text = editName.text
+            editName.visibility = View.INVISIBLE
+        }
+
+    return view
     }
 }

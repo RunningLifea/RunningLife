@@ -18,12 +18,23 @@ class FragmentMyPage : Fragment() {
         val editName = view.findViewById<TextView>(R.id.editName)
         val edit_btn = view.findViewById<ImageView>(R.id.edit_btn)
         val realName = view.findViewById<TextView>(R.id.realName)
-
+        var check = false
 
         edit_btn.setOnClickListener{
-            editName.visibility = View.VISIBLE
-            realName.text = editName.text
-            editName.visibility = View.INVISIBLE
+
+            if (!check) {
+                check = true
+                editName.visibility = View.VISIBLE;
+                realName.visibility = View.INVISIBLE
+
+            } else {
+                check = false
+                realName.text = editName.text
+                realName.visibility = View.VISIBLE
+                editName.visibility = View.INVISIBLE;
+            }
+
+
         }
 
     return view

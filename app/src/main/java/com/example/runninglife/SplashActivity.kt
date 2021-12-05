@@ -13,6 +13,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        RunningLifeApplication.prefs.clear()
+
         val getContent = this
 
         val splashText = findViewById<TextView>(R.id.splashText)

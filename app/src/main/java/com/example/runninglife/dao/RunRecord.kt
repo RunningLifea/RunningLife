@@ -1,10 +1,10 @@
 package com.example.runninglife.dao
 
+import java.time.LocalDate
+
 
 data class RunRecord(
-    val year: Int = 0,
-    val month: Int = 0,
-    val day: Int = 0,
+    val date: LocalDate = LocalDate.of(0,0,0),
     val dist: Int = 0
 )
 

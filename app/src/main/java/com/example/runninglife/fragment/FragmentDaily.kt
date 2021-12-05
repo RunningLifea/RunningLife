@@ -17,9 +17,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +38,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
 import kotlin.collections.ArrayList
@@ -75,8 +74,8 @@ class FragmentDaily : Fragment() {
         btn_edit_schedule.setOnClickListener {
             //데이터 담아서 팝업(액티비티) 호출
             val popup = Intent(activity, PopupActivity::class.java)
-            popup.putExtra("data", "Test Popup");
-            startActivityForResult(popup, 1);
+            popup.putExtra("data", "Test Popup")
+            startActivityForResult(popup, 1)
 
         }
 
@@ -95,6 +94,9 @@ class FragmentDaily : Fragment() {
         img_weather = view.findViewById(R.id.img_weather)
         text_weather = view.findViewById(R.id.text_weather)
         text_location = view.findViewById(R.id.text_location)
+        val img_location = view.findViewById<ImageButton>(R.id.img_location)
+        val weather = view.findViewById<LinearLayout>(R.id.weather)
+
         geocoder = Geocoder(activity)
 
         //check location condition
@@ -169,6 +171,13 @@ class FragmentDaily : Fragment() {
 
                         // 날짜 선택
                         getWeather(lat, lon)
+
+
+                        if(date.date != Date().date){
+                            weather.visibility = View.GONE
+                        }else {
+                            weather.visibility = View.VISIBLE
+                        }
                     }
 
                 }
@@ -179,7 +188,6 @@ class FragmentDaily : Fragment() {
         val snapHelper = PagerSnapHelper() // Or LinearSnapHelper
         snapHelper.attachToRecyclerView(calendarRecyclerView)
 
-
         return view
     }
 
@@ -188,7 +196,6 @@ class FragmentDaily : Fragment() {
             if(resultCode==Activity.RESULT_OK){
                 //데이터 받기
                 val result = data?.getStringExtra("result");
-                Log.d("test", "popup")
             }
         }
 
@@ -309,7 +316,6 @@ class FragmentDaily : Fragment() {
                     text_location.text = result_loc[result_loc.size-3] + ", " + result_loc[result_loc.size-2]
 
                     val weather = it.weather.get(index = 0).main
-                    Log.d("test", weather.toString())
 
                     when (weather.toString()) {
                         "Clouds" -> {

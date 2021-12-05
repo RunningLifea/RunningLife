@@ -50,7 +50,7 @@ class FragmentMonthly : Fragment() {
 
 
         for (data in datalist){
-            val d = LocalDate.of(data.year, data.month, data.day)
+            val d = LocalDate.of(data.date.year, data.date.month, data.date.dayOfMonth)
             datelist.add(d)
         }
 
@@ -167,8 +167,8 @@ class FragmentMonthly : Fragment() {
     private fun loadData() : List<RunRecord> {
         val data = ArrayList<RunRecord>()
 
-        val data1 = RunRecord(2021, 11, 28, 1)
-        val data2 = RunRecord(2021, 11, 25, 3)
+        val data1 = RunRecord(LocalDate.of(2021,11,28),1)
+        val data2 = RunRecord(LocalDate.of(2021, 11, 25),3)
 
         data.add(data1)
         data.add(data2)

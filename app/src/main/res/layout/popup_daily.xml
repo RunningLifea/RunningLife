@@ -16,7 +16,7 @@
             android:layout_height="53dp"
             android:background="#0488FE"
             android:gravity="center"
-            android:text="일정 등록"
+            android:text="Add Schedule"
             android:textColor="#fff"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -37,19 +37,29 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:text="제목 : "
+                android:text="Title"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="10dp"
+                android:textStyle="bold"
+                android:text=":"
+                />
 
             <EditText
                 android:id="@+id/edit_title"
                 android:layout_width="249dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="제목을 입력해주세요."
+                android:hint="Please input title"
                 android:inputType="textPersonName" />
         </LinearLayout>
 
@@ -61,19 +71,29 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:text="위치 : "
+                android:text="Site"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="10dp"
+                android:textStyle="bold"
+                android:text=":"
+                />
 
             <EditText
                 android:id="@+id/edit_location"
                 android:layout_width="249dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="위치 입력해주세요."
+                android:hint="Please input location"
                 android:inputType="textPersonName" />
         </LinearLayout>
 
@@ -85,19 +105,47 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:text="시작 : "
+                android:text="Start"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TimePicker
-                android:id="@+id/edit_start"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:timePickerMode="spinner"
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="10dp"
+                android:textStyle="bold"
+                android:text=":"
+                />
+
+            <Spinner
+                android:id="@+id/add_start_hour"
+                android:background="@drawable/spinner_time"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:dropDownWidth="30dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="10dp"
+                android:textStyle="bold"
+                android:text=":"
+                />
+
+            <Spinner
+                android:id="@+id/add_start_min"
+                android:background="@drawable/spinner_time"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:dropDownWidth="30dp"
                 />
         </LinearLayout>
 
@@ -109,20 +157,47 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:text="종료 : "
+                android:text="End"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-
-            <TimePicker
-                android:id="@+id/edit_end"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:timePickerMode="spinner"
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="10dp"
+                android:textStyle="bold"
+                android:text=":"
                 />
+
+            <Spinner
+                android:id="@+id/add_end_hour"
+                android:background="@drawable/spinner_time"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:dropDownWidth="30dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="10dp"
+                android:textStyle="bold"
+                android:text=":"
+                />
+
+
+            <Spinner
+                android:id="@+id/add_end_min"
+                android:background="@drawable/spinner_time"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:dropDownWidth="30dp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -141,8 +216,8 @@
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/btn_daily_dialog"
-            android:text="확인"
-            android:textSize="16sp"
+            android:text="Confirm"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#0488FE"
             android:gravity="center"

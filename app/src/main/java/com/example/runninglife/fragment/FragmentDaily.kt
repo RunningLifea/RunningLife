@@ -25,10 +25,13 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.runninglife.dao.WeatherResponse
 import com.example.runninglife.R
+import com.example.runninglife.RunningLifeApplication
 import com.example.runninglife.adapter.DailyExpandableAdapter
 import com.example.runninglife.adapter.HorizontalRecyclerCalendarAdapter
 import com.example.runninglife.dao.Daily
+import com.example.runninglife.dao.Day
 import com.example.runninglife.popup.PopupActivity
+import com.example.runninglife.retrofit.DataService
 import com.example.runninglife.retrofit.WeatherService
 import com.google.android.gms.location.*
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
@@ -38,8 +41,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -52,17 +57,21 @@ class FragmentDaily : Fragment() {
         LocationServices.getFusedLocationProviderClient(activity)
     }
 
+    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
+
     lateinit var img_weather: ImageView
     lateinit var text_weather : TextView
     lateinit var text_location : TextView
 
     lateinit var geocoder: Geocoder
 
-    private lateinit var dailyList: List<Daily>
     private lateinit var adapter: DailyExpandableAdapter
+    lateinit var item_recycler_view : RecyclerView
+    lateinit var nickname: String
+    lateinit var selectedDate:Date
 
 
-    @SuppressLint("NewApi")
+    @SuppressLint("NewApi", "SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,26 +79,22 @@ class FragmentDaily : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_daily, container, false)
 
+        nickname = RunningLifeApplication.prefs.getString("nickname", "")
+
+        selectedDate = Date()
         val btn_edit_schedule = view.findViewById<Button>(R.id.btn_edit_schedule)
         btn_edit_schedule.setOnClickListener {
             //데이터 담아서 팝업(액티비티) 호출
             val popup = Intent(activity, PopupActivity::class.java)
-            popup.putExtra("data", "Test Popup")
+            popup.putExtra("date", selectedDate)
             startActivityForResult(popup, 1)
 
         }
 
 
 
-        val item_recycler_view = view.findViewById<RecyclerView>(R.id.item_recycler)
-        dailyList = ArrayList()
-        dailyList = loadData()
-
-        item_recycler_view.setHasFixedSize(true)
-        item_recycler_view.layoutManager = LinearLayoutManager(context)
-        adapter = DailyExpandableAdapter(dailyList)
-        item_recycler_view.adapter = adapter
-
+        item_recycler_view = view.findViewById(R.id.item_recycler)
+        loadData(Date())
 
         img_weather = view.findViewById(R.id.img_weather)
         text_weather = view.findViewById(R.id.text_weather)
@@ -178,6 +183,10 @@ class FragmentDaily : Fragment() {
                         }else {
                             weather.visibility = View.VISIBLE
                         }
+
+                        selectedDate = date
+                        loadData(date)
+
                     }
 
                 }
@@ -201,16 +210,43 @@ class FragmentDaily : Fragment() {
 
     }
 
-    private fun loadData(): List<Daily> {
+    private fun loadData(date: Date){
+
         val dailyList = ArrayList<Daily>()
 
-        val data1 = Daily("Mobile Programming", LocalTime.of(10,0,0), LocalTime.of(10,30,0), "prontier", 0, false)
-        val data2 = Daily("Running", LocalTime.of(13,0,0), LocalTime.of(13,30,0), "Han River", 19, false)
+        item_recycler_view.setHasFixedSize(true)
+        item_recycler_view.layoutManager = LinearLayoutManager(context)
+        adapter = DailyExpandableAdapter(dailyList)
+        item_recycler_view.adapter = adapter
 
-        dailyList.add(data1)
-        dailyList.add(data2)
+        DataService.dayService.find(nickname, dateFormatter.format(date)).enqueue(object : Callback<List<Day>> {
+            override fun onResponse(call: Call<List<Day>>, response: Response<List<Day>>) {
 
-        return dailyList
+                    for (day in response.body()!!) {
+                        dailyList.add(
+                            Daily(
+                                day.title,
+                                day.date,
+                                LocalTime.parse(day.start, DateTimeFormatter.ofPattern("HH:mm")),
+                                LocalTime.parse(day.end, DateTimeFormatter.ofPattern("HH:mm")),
+                                day.location,
+                                day.temperature,
+                                false
+                            )
+                        )
+                    }
+
+                item_recycler_view.setHasFixedSize(true)
+                item_recycler_view.layoutManager = LinearLayoutManager(context)
+                adapter = DailyExpandableAdapter(dailyList)
+                item_recycler_view.adapter = adapter
+
+            }
+
+            override fun onFailure(call: Call<List<Day>>, t: Throwable) {
+            }
+
+        })
     }
 
     @SuppressLint("MissingPermission")

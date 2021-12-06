@@ -56,7 +56,7 @@ class WarmUpActivity : AppCompatActivity() {
                 play.setImageResource(R.drawable.warm_up_play)
                 state = true
             }
-        }, 3, TimeFormatEnum.SECONDS, 3)
+        }, 10, TimeFormatEnum.SECONDS, 10)
 
 
         // To start timer

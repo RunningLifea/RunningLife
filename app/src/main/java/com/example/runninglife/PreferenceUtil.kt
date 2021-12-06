@@ -2,6 +2,7 @@ package com.example.runninglife
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.text.Editable
 
 class PreferenceUtil(context: Context) {
     private val prefs: SharedPreferences =

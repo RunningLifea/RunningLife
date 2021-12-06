@@ -78,11 +78,11 @@
             >
 
             <ImageView
-                android:id="@+id/dist_plus"
+                android:id="@+id/dist_minus"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="start"
-                android:src="@drawable/arrow_plus"/>
+                android:layout_gravity="start|center_vertical"
+                android:src="@drawable/arrow_minus"/>
 
             <View
                 android:layout_width="0dp"
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="16"
+                android:text="7"
                 android:textColor="@color/white"
                 android:textSize="40sp"
 
@@ -108,11 +108,11 @@
                 />
 
             <ImageView
-                android:id="@+id/dist_minus"
+                android:id="@+id/dist_plus"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="end"
-                android:src="@drawable/arrow_minus"/>
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/arrow_plus"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
@@ -143,11 +143,11 @@
             >
 
             <ImageView
-                android:id="@+id/time_plus"
+                android:id="@+id/time_minus"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="start"
-                android:src="@drawable/arrow_plus"/>
+                android:layout_gravity="start|center_vertical"
+                android:src="@drawable/arrow_minus"/>
 
             <View
                 android:layout_width="0dp"
@@ -160,11 +160,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="16"
+                android:text="7"
                 android:textColor="@color/white"
                 android:textSize="40sp"
-
                 android:textStyle="bold" />
+
 
             <View
                 android:layout_width="0dp"
@@ -173,11 +173,12 @@
                 />
 
             <ImageView
-                android:id="@+id/time_minus"
+                android:id="@+id/time_plus"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="end"
-                android:src="@drawable/arrow_minus"/>
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/arrow_plus"/>
+
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"

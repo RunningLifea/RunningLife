@@ -21,10 +21,11 @@ class DataService {
             .client(OkHttpClient())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addConverterFactory(ScalarsConverterFactory.create())
-            .baseUrl(localURl)
+            .baseUrl(serverURL)
             .build()
 
         val userService : UserService = retrofit.create(UserService::class.java)
+        val dayService : DayService = retrofit.create(DayService::class.java)
     }
 
 

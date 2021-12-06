@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.runninglife.R
 import com.example.runninglife.RunningLifeApplication
+import com.example.runninglife.retrofit.DataService
 
 class FragmentMyPage : Fragment() {
     override fun onCreateView(
@@ -17,16 +18,21 @@ class FragmentMyPage : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_my_page, container, false)
-        val editName = view.findViewById<TextView>(R.id.editName)
-        val edit_btn = view.findViewById<ImageView>(R.id.edit_btn)
-        val realName = view.findViewById<TextView>(R.id.realName)
+
+
+
+        val realName = view.findViewById<TextView>(R.id.realName) // 실제 이름
+        val editName = view.findViewById<TextView>(R.id.editName) // 수정 이름
+        val edit_btn = view.findViewById<ImageView>(R.id.edit_btn) // 수정 버튼
         var check = false
 
         val nickname = RunningLifeApplication.prefs.getString("nickname", "")
-        editName.text = nickname
-        realName.text = nickname
-        edit_btn.setOnClickListener {
 
+
+
+        realName.text = nickname
+        editName.text = nickname
+        edit_btn.setOnClickListener {
             if (!check) {
                 check = true
                 editName.visibility = View.VISIBLE;

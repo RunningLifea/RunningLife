@@ -13,7 +13,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        RunningLifeApplication.prefs.clear()
+        // preference 초기
+        // RunningLifeApplication.prefs.clear()
 
         val getContent = this
 

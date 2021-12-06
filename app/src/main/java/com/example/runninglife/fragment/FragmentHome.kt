@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.example.runninglife.R
 import com.example.runninglife.WarmUpActivity
 import com.example.runninglife.popup.PopupActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FragmentHome : Fragment() {
     override fun onCreateView(
@@ -19,27 +20,23 @@ class FragmentHome : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val warmUp = view.findViewById<ImageButton>(R.id.imageButton3)
+        val warmUp = view.findViewById<ImageView>(R.id.btn_warm_up)
 
         warmUp.setOnClickListener {
             val warmUpIntent = Intent(activity, WarmUpActivity::class.java)
             startActivity(warmUpIntent)
 
         }
-        val daily_btn = view.findViewById<ImageView>(R.id.daily_btn)
+        val daily_btn = view.findViewById<ImageView>(R.id.btn_daily)
 
         daily_btn.setOnClickListener {
             val intent = Intent(activity,PopupActivity::class.java)
             startActivity(intent)
         }
-        val setgoal = view.findViewById<ImageView>(R.id.setgoal)
-        val fragmentMyPage = FragmentMyPage()
+        val setgoal = view.findViewById<ImageView>(R.id.btn_setting)
         setgoal.setOnClickListener {
-            //my page
-
-
-
-
+            val bottom = activity?.findViewById<BottomNavigationView>(R.id.bottom)
+            bottom?.selectedItemId = R.id.mypage
         }
 
         return view

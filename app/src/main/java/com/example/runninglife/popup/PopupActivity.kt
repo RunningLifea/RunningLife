@@ -5,11 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.view.Window
 import android.widget.*
 import com.example.runninglife.R
+import com.example.runninglife.RunningLifeApplication
+import com.example.runninglife.dao.Day
+import com.example.runninglife.retrofit.DataService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.DecimalFormat
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 
 class PopupActivity : Activity() {
 
@@ -19,9 +27,19 @@ class PopupActivity : Activity() {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.popup_daily)
 
-        val text = findViewById<EditText>(R.id.edit_title)
+        val nickname = RunningLifeApplication.prefs.getString("nickname", "")
 
-        val data = intent.getStringExtra("data")
+        val text = findViewById<EditText>(R.id.edit_title)
+        val location = findViewById<EditText>(R.id.edit_location)
+
+        val date = (intent.getSerializableExtra("date") as Date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        val df = DecimalFormat("00")
+
+        if (date != null) {
+            Log.d("test", date.toString())
+        }
+
 
         val hour_list = (0..24).toList()
         val min_list = (0..60).toList()
@@ -55,13 +73,39 @@ class PopupActivity : Activity() {
 
         val btn_daily_dialog = findViewById<Button>(R.id.btn_daily_dialog)
         btn_daily_dialog.setOnClickListener {
-            Log.d("test", start_hour.selectedItem.toString()) // 선택된 아이템 불러오기
-            val new_intent = Intent()
-            new_intent.putExtra("result", "Close Popup");
-            setResult(RESULT_OK, new_intent);
+            if (text.text.isEmpty() || location.text.isEmpty()) {
+                finish()
+            } else {
+                val start = "${df.format(start_hour.selectedItem)}:${df.format(start_min.selectedItem)}"
+                val end = "${df.format(end_hour.selectedItem)}:${df.format(end_min.selectedItem)}"
+                val day = Day(text.text.toString(),  start, end, date.toString(), location.text.toString())
 
-            //액티비티(팝업) 닫기
-            finish();
+                DataService.dayService.upload(day, nickname).enqueue(object : Callback<Day>{
+                    override fun onResponse(call: Call<Day>, response: Response<Day>) {
+                        if (response.isSuccessful) {
+                            val new_intent = Intent()
+                            new_intent.putExtra("result", "Close Popup");
+                            setResult(RESULT_OK, new_intent);
+
+                            //토스트 띄우기
+                            Toast.makeText(this@PopupActivity, "Upload Success", Toast.LENGTH_LONG).show()
+
+                            //액티비티(팝업) 닫기
+                            finish();
+                        }else{
+                            //토스트 띄우기
+                            Toast.makeText(this@PopupActivity, "Existing Schedule", Toast.LENGTH_LONG).show()
+
+                        }
+
+                    }
+
+                    override fun onFailure(call: Call<Day>, t: Throwable) {
+                        Log.d("test", "fail")
+                    }
+
+                })
+            }
 
         }
     }
@@ -76,6 +120,6 @@ class PopupActivity : Activity() {
     }
 
     override fun onBackPressed() {
-        return
+        finish()
     }
 }

@@ -12,8 +12,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/setgoal"
+    <ImageView
+        android:id="@+id/btn_setting"
         android:layout_width="0dp"
         android:layout_height="103dp"
         android:layout_marginStart="20dp"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setgoal"
+        app:layout_constraintTop_toBottomOf="@+id/btn_setting"
         app:srcCompat="@drawable/box2" />
 
     <ImageView
@@ -77,15 +77,14 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/just2" />
 
-    <ImageButton
-        android:id="@+id/daily_btn"
+    <ImageView
+        android:id="@+id/btn_daily"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="251dp"
         android:layout_marginTop="47dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="9dp"
-        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintHorizontal_bias="0.507"
@@ -94,8 +93,8 @@
         app:layout_constraintVertical_bias="0.513"
         app:srcCompat="@drawable/arrow" />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
+    <ImageView
+        android:id="@+id/btn_warm_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="131dp"

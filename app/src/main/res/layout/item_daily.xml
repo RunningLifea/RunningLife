@@ -169,21 +169,29 @@
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/time_set" />
 
-        <TextView
-            android:id="@+id/text_expand_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/btn_bottom"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Running Start"
-            android:textAlignment="center"
-            android:textColor="#0488FE"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/horiznotal_line" />
+            app:layout_constraintTop_toBottomOf="@+id/horiznotal_line"
+            >
+
+            <TextView
+                android:id="@+id/text_expand_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Running Start"
+                android:textAlignment="center"
+                android:textColor="#0488FE"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/text_temperature"

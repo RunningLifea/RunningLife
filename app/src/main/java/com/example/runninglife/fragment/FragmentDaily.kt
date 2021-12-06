@@ -41,9 +41,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
@@ -204,7 +206,11 @@ class FragmentDaily : Fragment() {
         if(requestCode==1){
             if(resultCode==Activity.RESULT_OK){
                 //데이터 받기
-                val result = data?.getStringExtra("result");
+                val date = data?.getSerializableExtra("date") as LocalDate
+
+                loadData(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()))
+
+
             }
         }
 

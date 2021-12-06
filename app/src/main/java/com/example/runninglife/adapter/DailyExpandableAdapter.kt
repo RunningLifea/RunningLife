@@ -9,8 +9,13 @@ import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.runninglife.R
+import com.example.runninglife.RunningLifeApplication
 import com.example.runninglife.dao.Daily
 import com.example.runninglife.dao.Day
+import com.example.runninglife.retrofit.DataService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.DecimalFormat
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -29,10 +34,13 @@ class DailyExpandableAdapter (private val dailyList: List<Daily>) : RecyclerView
         lateinit var edit_start_time:String
         lateinit var edit_end_time:String
 
+
+
         @SuppressLint("SetTextI18n")
         fun bind(daily: Daily) {
             val df = DecimalFormat("00")
             var check = true
+            val nickname = RunningLifeApplication.prefs.getString("nickname", "")
 
             val text_title = itemView.findViewById<TextView>(R.id.txt_title_time)
             val text_time = itemView.findViewById<TextView>(R.id.text_clock)
@@ -111,76 +119,107 @@ class DailyExpandableAdapter (private val dailyList: List<Daily>) : RecyclerView
                     }
 
                     text_expand_title.text = "edit schedule"
-
+                    check = ! check
                 }else {
                     // DB 수정
+                    val new_day = old_day.copy()
+                    new_day.location = edit_daily_location.text.toString()
+                    new_day.start = "${df.format(edit_start_hour.selectedItem)}:${df.format(edit_start_min.selectedItem)}"
+                    new_day.end = "${df.format(edit_end_hour.selectedItem)}:${df.format(edit_end_min.selectedItem)}"
 
-                    Log.d("test", "설정 완료")
+                    DataService.dayService.update(mapOf("old_day" to old_day, "new_day" to new_day), nickname).enqueue(object : Callback<Day>{
+                        override fun onResponse(call: Call<Day>, response: Response<Day>) {
+                            if (response.isSuccessful) {
+                                Log.d("test", "설정 완료")
 
-                    daily.start =
-                        LocalTime.of(edit_start_hour.selectedItem as Int,
-                            edit_start_min.selectedItem as Int
-                        )
+                                daily.start =
+                                    LocalTime.of(edit_start_hour.selectedItem as Int,
+                                        edit_start_min.selectedItem as Int
+                                    )
 
-                    daily.end =
-                        LocalTime.of(edit_end_hour.selectedItem as Int,
-                            edit_end_min.selectedItem as Int
-                        )
+                                daily.end =
+                                    LocalTime.of(edit_end_hour.selectedItem as Int,
+                                        edit_end_min.selectedItem as Int
+                                    )
 
-                    daily.location = edit_daily_location.text.toString()
+                                daily.location = edit_daily_location.text.toString()
 
-                    edit_start_time = "${df.format(edit_start_hour.selectedItem)}:${df.format(edit_start_min.selectedItem)}"
-                    edit_end_time = "${df.format(edit_end_hour.selectedItem)}:${df.format(edit_end_min.selectedItem)}"
-                    text_expand_title.text = daily.name
-                    text_location.text = edit_daily_location.text.toString()
-                    text_location.visibility = View.VISIBLE
-                    edit_daily_location.visibility = View.GONE
-                    text_time.visibility = View.VISIBLE
-                    text_time.text = "$edit_start_time ~ $edit_end_time"
-                    text_title.text = "$edit_start_time ~ $edit_end_time"
-                    time_set.visibility = View.GONE
-                    if(daily.name == "Running"){
-                        text_temperature.visibility = View.VISIBLE
-                        img_temperature.visibility = View.VISIBLE
-                    }
+                                edit_start_time = "${df.format(edit_start_hour.selectedItem)}:${df.format(edit_start_min.selectedItem)}"
+                                edit_end_time = "${df.format(edit_end_hour.selectedItem)}:${df.format(edit_end_min.selectedItem)}"
+                                text_expand_title.text = daily.name
+                                text_location.text = edit_daily_location.text.toString()
+                                text_location.visibility = View.VISIBLE
+                                edit_daily_location.visibility = View.GONE
+                                text_time.visibility = View.VISIBLE
+                                text_time.text = "$edit_start_time ~ $edit_end_time"
+                                text_title.text = "$edit_start_time ~ $edit_end_time"
+                                time_set.visibility = View.GONE
+                                if(daily.name == "Running"){
+                                    text_temperature.visibility = View.VISIBLE
+                                    img_temperature.visibility = View.VISIBLE
+                                }
+                                check = ! check
+                            }
+                            else {
+                            }
+                        }
 
+                        override fun onFailure(call: Call<Day>, t: Throwable) {
+                        }
+
+                    })
                 }
-
-                check = ! check
-
             }
 
             text_expand_title.setOnClickListener {
                 if(!check) {
-                    Log.d("test", "설정 완료")
+                    // DB 수정
+                    val new_day = old_day.copy()
+                    new_day.location = edit_daily_location.text.toString()
+                    new_day.start = "${df.format(edit_start_hour.selectedItem)}:${df.format(edit_start_min.selectedItem)}"
+                    new_day.end = "${df.format(edit_end_hour.selectedItem)}:${df.format(edit_end_min.selectedItem)}"
 
-                    daily.start =
-                        LocalTime.of(edit_start_hour.selectedItem as Int,
-                            edit_start_min.selectedItem as Int
-                        )
+                    DataService.dayService.update(mapOf("old_day" to old_day, "new_day" to new_day), nickname).enqueue(object : Callback<Day>{
+                        override fun onResponse(call: Call<Day>, response: Response<Day>) {
+                            if (response.isSuccessful) {
+                                Log.d("test", "설정 완료")
 
-                    daily.end =
-                        LocalTime.of(edit_end_hour.selectedItem as Int,
-                            edit_end_min.selectedItem as Int
-                        )
+                                daily.start =
+                                    LocalTime.of(edit_start_hour.selectedItem as Int,
+                                        edit_start_min.selectedItem as Int
+                                    )
 
-                    daily.location = edit_daily_location.text.toString()
+                                daily.end =
+                                    LocalTime.of(edit_end_hour.selectedItem as Int,
+                                        edit_end_min.selectedItem as Int
+                                    )
 
-                    edit_start_time = "${df.format(edit_start_hour.selectedItem)}:${df.format(edit_start_min.selectedItem)}"
-                    edit_end_time = "${df.format(edit_end_hour.selectedItem)}:${df.format(edit_end_min.selectedItem)}"
-                    text_expand_title.text = daily.name
-                    text_location.text = edit_daily_location.text.toString()
-                    text_location.visibility = View.VISIBLE
-                    edit_daily_location.visibility = View.GONE
-                    text_time.visibility = View.VISIBLE
-                    text_time.text = "$edit_start_time ~ $edit_end_time"
-                    text_title.text = "$edit_start_time ~ $edit_end_time"
-                    time_set.visibility = View.GONE
-                    if(daily.name == "Running"){
-                        text_temperature.visibility = View.VISIBLE
-                        img_temperature.visibility = View.VISIBLE
-                    }
-                    check = ! check
+                                daily.location = edit_daily_location.text.toString()
+
+                                edit_start_time = "${df.format(edit_start_hour.selectedItem)}:${df.format(edit_start_min.selectedItem)}"
+                                edit_end_time = "${df.format(edit_end_hour.selectedItem)}:${df.format(edit_end_min.selectedItem)}"
+                                text_expand_title.text = daily.name
+                                text_location.text = edit_daily_location.text.toString()
+                                text_location.visibility = View.VISIBLE
+                                edit_daily_location.visibility = View.GONE
+                                text_time.visibility = View.VISIBLE
+                                text_time.text = "$edit_start_time ~ $edit_end_time"
+                                text_title.text = "$edit_start_time ~ $edit_end_time"
+                                time_set.visibility = View.GONE
+                                if(daily.name == "Running"){
+                                    text_temperature.visibility = View.VISIBLE
+                                    img_temperature.visibility = View.VISIBLE
+                                }
+                                check = ! check
+                            }
+                            else {
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Day>, t: Throwable) {
+                        }
+
+                    })
                 }else {
                     if(daily.name == "Running"){
                         Log.d("test", "달리기")

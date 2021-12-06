@@ -84,7 +84,7 @@ class PopupActivity : Activity() {
                     override fun onResponse(call: Call<Day>, response: Response<Day>) {
                         if (response.isSuccessful) {
                             val new_intent = Intent()
-                            new_intent.putExtra("result", "Close Popup");
+                            new_intent.putExtra("date", date);
                             setResult(RESULT_OK, new_intent);
 
                             //토스트 띄우기

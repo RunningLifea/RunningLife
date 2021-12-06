@@ -15,5 +15,6 @@ interface DayService {
     @GET("/day/find")
     fun find(@Query("name") name:String, @Query("date") date:String) : Call<List<Day>>
 
-
+    @POST("/day/update")
+    fun update(@Body map: Map<String, Day>, @Query("name") name:String): Call<Day>
 }

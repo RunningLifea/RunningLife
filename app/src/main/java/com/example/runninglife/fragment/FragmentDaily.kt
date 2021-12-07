@@ -93,15 +93,12 @@ class FragmentDaily : Fragment() {
 
         }
 
-
-
         item_recycler_view = view.findViewById(R.id.item_recycler)
         loadData(Date())
 
         img_weather = view.findViewById(R.id.img_weather)
         text_weather = view.findViewById(R.id.text_weather)
         text_location = view.findViewById(R.id.text_location)
-        val img_location = view.findViewById<ImageButton>(R.id.img_location)
         val weather = view.findViewById<LinearLayout>(R.id.weather)
 
         geocoder = Geocoder(activity)
@@ -210,7 +207,6 @@ class FragmentDaily : Fragment() {
 
                 loadData(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()))
 
-
             }
         }
 
@@ -237,7 +233,7 @@ class FragmentDaily : Fragment() {
                                 LocalTime.parse(day.end, DateTimeFormatter.ofPattern("HH:mm")),
                                 day.location,
                                 day.temperature,
-                                false
+                                day.complete
                             )
                         )
                     }

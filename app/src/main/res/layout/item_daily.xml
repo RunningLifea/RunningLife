@@ -68,6 +68,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:maxLines="1"
+            android:ellipsize="end"
             android:id="@+id/txt_name"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -96,7 +98,7 @@
         android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="gone">
 
 
         <View
@@ -116,8 +118,8 @@
             android:layout_width="300dp"
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
             android:background="@drawable/layout_round_corner_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/long_line"
@@ -169,19 +171,12 @@
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/time_set" />
 
-        <LinearLayout
-            android:id="@+id/btn_bottom"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/horiznotal_line"
-            >
 
             <TextView
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:id="@+id/text_expand_title"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
@@ -189,8 +184,12 @@
                 android:textAlignment="center"
                 android:textColor="#0488FE"
                 android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/horiznotal_line"
+                />
 
 
         <TextView
@@ -348,16 +347,140 @@
 
             </LinearLayout>
 
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_complete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+
+        <View
+            android:id="@+id/long_line2"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/complete"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_round_corner_text"
+            android:layout_marginVertical="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/long_line2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="32dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/input_distance"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="12dp"
+                    >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Distance"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="10dp"
+                        android:textStyle="bold"
+                        android:text=":"
+                        />
+
+                    <EditText
+                        android:id="@+id/add_record"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789"
+                        android:ems="10"
+                        android:hint="Please input"
+                        android:inputType="number"
+                        android:textColorHint="#BBBBBB" />
+                </LinearLayout>
+                <View
+                    android:background="#A0A0A0"
+                    android:layout_width="300dp"
+                    android:layout_height="2dp"
+                    android:layout_marginVertical="4dp"
+                    />
+            </LinearLayout>
+            <!-- Notice -->
+
+
+            <!-- 닫기 버튼 -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <Button
+                    android:id="@+id/btn_complete"
+                    android:text="Complete"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#0488FE"
+                    android:gravity="center"
+                    android:background="#00000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    />
+
+                <View
+                    android:background="#A0A0A0"
+                    android:layout_width="300dp"
+                    android:layout_height="2dp"
+                    android:layout_marginVertical="4dp"
+                    />
+
+                <Button
+                    android:id="@+id/btn_cancle"
+                    android:text="Cancle"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#0488FE"
+                    android:gravity="center"
+                    android:background="#00000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp" />
+            </LinearLayout>
 
 
         </LinearLayout>
 
 
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </LinearLayout>

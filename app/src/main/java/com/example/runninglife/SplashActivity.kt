@@ -7,6 +7,13 @@ import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import com.example.runninglife.dao.User
+import com.example.runninglife.retrofit.DataService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+private lateinit var user : User
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +29,26 @@ class SplashActivity : AppCompatActivity() {
         val slowly_appear = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         splashText.animation = slowly_appear
 
+        RunningLifeApplication.prefs.setString("nickname", "LeeYooSeok")
         val nickname = RunningLifeApplication.prefs.getString("nickname", "")
+
+        if (nickname != "") {
+            DataService.userService.findByName(nickname).enqueue(object : Callback<User>{
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        user = response.body()!!
+                        RunningLifeApplication.prefs.setString("distance", user.distance.toString())
+                        RunningLifeApplication.prefs.setString("time", user.time.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                }
+
+            })
+        }
+
+
 
 
         splashText.animation.setAnimationListener(object : Animation.AnimationListener {

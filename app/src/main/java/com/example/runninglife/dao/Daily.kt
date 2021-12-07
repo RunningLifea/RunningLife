@@ -9,5 +9,6 @@ data class Daily(
     var end : LocalTime = LocalTime.of(0,0,0),
     var location : String = "",
     var temperature : Int = 0,
+    var complete : Boolean = false,
     var isExpanded: Boolean = false
 )

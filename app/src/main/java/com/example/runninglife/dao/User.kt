@@ -1,5 +1,7 @@
 package com.example.runninglife.dao
 
+import java.io.Serializable
+
 data class User(
     val name: String = "",
 
@@ -7,4 +9,4 @@ data class User(
 
     val time: Int = 0
 
-)
+) : Serializable

@@ -17,4 +17,7 @@ interface DayService {
 
     @POST("/day/update")
     fun update(@Body map: Map<String, Day>, @Query("name") name:String): Call<Day>
+
+    @POST("/day/complete")
+    fun complete(@Body day:Day, @Query("name") name : String) : Call<Day>
 }

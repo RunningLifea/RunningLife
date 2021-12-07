@@ -1,8 +1,10 @@
 package com.example.runninglife
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.runninglife.adapter.DailyExpandableAdapter
 import com.example.runninglife.fragment.FragmentDaily
 import com.example.runninglife.fragment.FragmentHome
 import com.example.runninglife.fragment.FragmentMonthly
@@ -16,14 +18,12 @@ class MainActivity : AppCompatActivity() {
     private val fragmentMonthly = FragmentMonthly()
     private val fragmentMyPage = FragmentMyPage()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initNavigationBar()
 
     }
-
 
     private fun initNavigationBar() {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom)
@@ -55,5 +55,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fl_container, fragment)
             .commit()
     }
+
 
 }

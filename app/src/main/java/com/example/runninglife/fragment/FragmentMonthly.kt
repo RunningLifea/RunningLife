@@ -5,36 +5,46 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.Dimension
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import com.example.runninglife.DayViewContainer
-import com.example.runninglife.MonthFooterContainer
-import com.example.runninglife.MonthViewContainer
-import com.example.runninglife.R
-import com.example.runninglife.dao.RunRecord
+import com.example.runninglife.*
+import com.example.runninglife.dao.Record
+import com.example.runninglife.dao.User
+import com.example.runninglife.retrofit.DataService
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
-import org.w3c.dom.Text
+import java.text.DecimalFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import javax.security.auth.callback.Callback
 
 
 class FragmentMonthly : Fragment() {
 
-    private lateinit var datalist: List<RunRecord>
+    private lateinit var datalist: List<Record>
+    private lateinit var nickname : String
+    private lateinit var datelist : ArrayList<LocalDate>
+
+    private val df = DecimalFormat("00")
+
+    private val distance = RunningLifeApplication.prefs.getString("distance","0").toInt()
+    private val time = RunningLifeApplication.prefs.getString("time", "0").toInt()
+
+    private lateinit var progress_bar : ProgressBar
+    private lateinit var progress_text : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,15 +52,18 @@ class FragmentMonthly : Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_monthly, container, false)
 
+        nickname = RunningLifeApplication.prefs.getString("nickname", "")
+
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView2)
 
 
-        datalist = loadData()
-        var datelist = ArrayList<LocalDate>()
 
+        datalist = loadData()
+
+        datelist = ArrayList<LocalDate>()
 
         for (data in datalist){
-            val d = LocalDate.of(data.date.year, data.date.month, data.date.dayOfMonth)
+            val d = LocalDate.parse(data.date, DateTimeFormatter.ISO_DATE)
             datelist.add(d)
         }
 
@@ -61,9 +74,10 @@ class FragmentMonthly : Fragment() {
             // Called every time we need to reuse a container.
             @SuppressLint("SetTextI18n")
             override fun bind(container: DayViewContainer, day: CalendarDay) {
+
                 // 데이터 불러와서 키로수 뒤에 붙여주기
                 if(day.date in datelist){
-                    container.textView.text = day.date.dayOfMonth.toString() + "\n${datalist[datelist.indexOf(day.date)].dist}km"
+                    container.textView.text = day.date.dayOfMonth.toString() + "\n${datalist[datelist.indexOf(day.date)].distance}km"
                 }else{
                     container.textView.text = day.date.dayOfMonth.toString() + "\n"
                 }
@@ -94,6 +108,9 @@ class FragmentMonthly : Fragment() {
                 }
                 val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, items)
 
+                progress_bar = container.view.findViewById(R.id.progress_bar)
+                progress_text = container.view.findViewById(R.id.progress_text)
+
                 val spinner = container.spinner
                 spinner.adapter = spinnerAdapter
                 spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -112,22 +129,22 @@ class FragmentMonthly : Fragment() {
 
                         when(position) {
                             0 ->{
-                                Log.d("test", "week1")
+                                setProgress(month.weekDays[0])
                             }
                             1 ->{
-                                Log.d("test", "week2")
+                                setProgress(month.weekDays[1])
                             }
                             2 ->{
-                                Log.d("test", "week3")
+                                setProgress(month.weekDays[2])
                             }
                             3 ->{
-                                Log.d("test", "week4")
+                                setProgress(month.weekDays[3])
                             }
                             4 ->{
-                                Log.d("test", "week5")
+                                setProgress(month.weekDays[4])
                             }
                             else -> {
-                                Log.d("test", "week6")
+                                setProgress(month.weekDays[5])
                             }
                         }
                     }
@@ -136,7 +153,7 @@ class FragmentMonthly : Fragment() {
                         Log.d("test", "nothing")
                     }
                 }
-                spinner.setSelection(2)
+                spinner.setSelection(0)
 
             }
 
@@ -164,15 +181,37 @@ class FragmentMonthly : Fragment() {
         return view
     }
 
-    private fun loadData() : List<RunRecord> {
-        val data = ArrayList<RunRecord>()
+    @SuppressLint("SetTextI18n")
+    private fun setProgress(list: List<CalendarDay>) {
+        var total_dist = 0
+        for (day in list) {
+            if (datelist.contains(day.date)) {
+                for (r in datalist) {
+                    if (r.date == day.date.toString()) {
+                        total_dist += r.distance
+                    }
+                }
+            }
 
-        val data1 = RunRecord(LocalDate.of(2021,11,28),1)
-        val data2 = RunRecord(LocalDate.of(2021, 11, 25),3)
+        }
 
-        data.add(data1)
-        data.add(data2)
 
+        progress_bar.progress = df.format((total_dist.toDouble()/distance)*100).toInt()
+        progress_text.text = "${df.format((total_dist.toDouble()/distance)*100)} %"
+    }
+
+    private fun loadData() : ArrayList<Record> {
+        var data = ArrayList<Record>()
+
+        Thread(Runnable {
+            kotlin.run () {
+                    data = DataService.recordService.read(nickname, "2021-01-01", "2022-12-01").execute().body() as ArrayList<Record>
+            }
+        }).start()
+
+        Thread.sleep(1000)
+
+        
         return data
     }
 

@@ -75,6 +75,9 @@ class SignUpActivity : AppCompatActivity() {
                         nickname.hint = "existing nickname"
                         nickname.setHintTextColor(Color.RED)
                     }else {
+                        RunningLifeApplication.prefs.setString("distance", target_dist.toString())
+                        RunningLifeApplication.prefs.setString("time", target_time.toString())
+
                         load_main()
                     }
                 }
@@ -92,6 +95,8 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun load_main() {
+
+
         val mainIntent = Intent(this, MainActivity::class.java)
         startActivity(mainIntent)
     }

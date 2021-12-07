@@ -44,7 +44,8 @@
         <entry key="app/src/main/res/layout/fragment_monthly.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/item_calendar_horizontal.xml" value="0.22291666666666668" />
-        <entry key="app/src/main/res/layout/item_daily.xml" value="0.5551436515291936" />
+        <entry key="app/src/main/res/layout/item_daily.xml" value="0.5830013280212484" />
+        <entry key="app/src/main/res/layout/popup_completed.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/popup_daily.xml" value="0.26021505376344084" />
         <entry key="app/src/main/res/layout/spinner_item.xml" value="0.3704710144927536" />
         <entry key="app/src/main/res/layout/spinner_time.xml" value="0.2515625" />

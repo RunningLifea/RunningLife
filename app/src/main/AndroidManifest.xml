@@ -40,6 +40,9 @@
         <activity
             android:name=".popup.PopupActivity"
             android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".popup.CompleteActivity"
+            android:theme="@android:style/Theme.Dialog"/>
     </application>
 
 </manifest>

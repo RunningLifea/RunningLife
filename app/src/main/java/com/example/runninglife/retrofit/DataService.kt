@@ -26,6 +26,7 @@ class DataService {
 
         val userService : UserService = retrofit.create(UserService::class.java)
         val dayService : DayService = retrofit.create(DayService::class.java)
+        val recordService : RecordService = retrofit.create(RecordService::class.java)
     }
 
 

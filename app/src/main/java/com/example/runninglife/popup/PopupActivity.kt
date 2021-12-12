@@ -10,11 +10,16 @@ import android.widget.*
 import com.example.runninglife.R
 import com.example.runninglife.RunningLifeApplication
 import com.example.runninglife.dao.Day
+import com.example.runninglife.dao.Record
 import com.example.runninglife.retrofit.DataService
+import com.example.runninglife.retrofit.WeatherService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
@@ -26,6 +31,9 @@ class PopupActivity : Activity() {
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.popup_daily)
+
+        val lat = intent.getStringExtra("lat").toString()
+        val lon = intent.getStringExtra("lon").toString()
 
         val nickname = RunningLifeApplication.prefs.getString("nickname", "")
 
@@ -39,7 +47,6 @@ class PopupActivity : Activity() {
         if (date != null) {
             Log.d("test", date.toString())
         }
-
 
         val hour_list = (0..24).toList()
         val min_list = (0..60).toList()
@@ -70,7 +77,6 @@ class PopupActivity : Activity() {
         end_min.setSelection(hour_list.indexOf(min))
 
 
-
         val btn_daily_dialog = findViewById<Button>(R.id.btn_daily_dialog)
         btn_daily_dialog.setOnClickListener {
             if (text.text.isEmpty() || location.text.isEmpty()) {
@@ -78,6 +84,32 @@ class PopupActivity : Activity() {
             } else {
                 val start = "${df.format(start_hour.selectedItem)}:${df.format(start_min.selectedItem)}"
                 val end = "${df.format(end_hour.selectedItem)}:${df.format(end_min.selectedItem)}"
+
+                // unixtime
+                val uniTime =  SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(date.toString()).time.toString()
+
+                finish()
+
+                // 시간 별 날씨 불러오기
+                val APPID = "216f63e517f56ad4f20ba181f5bb04f5"
+                val url = "https://api.openweathermap.org/"
+                val retrofit = Retrofit.Builder()
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                val weatherService = retrofit.create(WeatherService::class.java)
+
+                Thread(Runnable {
+                    kotlin.run () {
+                        Log.d("test",
+                            weatherService.getHourlyTemperature(lat, lon, uniTime, APPID).execute().body()
+                                .toString()
+                        )
+                    }
+                }).start()
+
+                Thread.sleep(1000)
+
                 val day = Day(text.text.toString(),  start, end, date.toString(), location.text.toString())
 
                 DataService.dayService.upload(day, nickname).enqueue(object : Callback<Day>{

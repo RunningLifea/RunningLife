@@ -88,6 +88,8 @@ class FragmentDaily : Fragment() {
         btn_edit_schedule.setOnClickListener {
             //데이터 담아서 팝업(액티비티) 호출
             val popup = Intent(activity, PopupActivity::class.java)
+            popup.putExtra("lat", lat)
+            popup.putExtra("lon", lon)
             popup.putExtra("date", selectedDate)
             startActivityForResult(popup, 1)
 

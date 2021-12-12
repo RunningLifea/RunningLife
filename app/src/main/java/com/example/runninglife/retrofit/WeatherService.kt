@@ -13,5 +13,12 @@ interface WeatherService {
         @Query("appid") appid: String) :
             Call<WeatherResponse>
 
+    @GET("data/2.5/onecall/timemachine")
+    fun getHourlyTemperature(
+        @Query("lat") lat: String,
+        @Query("lon") lon : String,
+        @Query("dt") dt : String,
+        @Query("appid") appid: String
+        ) : Call<Any>
 
 }

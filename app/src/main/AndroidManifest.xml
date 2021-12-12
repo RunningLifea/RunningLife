@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.runninglife">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -42,7 +43,13 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".popup.CompleteActivity"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:theme="@android:style/Theme.Dialog"
+            tools:ignore="MissingClass" />
     </application>
+        <queries>
+            <package android:name="com.nike.plus" />
+        </queries>
+
+
 
 </manifest>

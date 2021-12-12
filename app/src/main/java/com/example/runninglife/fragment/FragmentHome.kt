@@ -36,18 +36,18 @@ class FragmentHome : Fragment() {
             startActivity(warmUpIntent)
 
         }
-        val daily_btn = view.findViewById<ImageView>(R.id.btn_daily)
-
-        daily_btn.setOnClickListener {
-            val intent = Intent(activity,PopupActivity::class.java)
-            startActivity(intent)
-        }
         val setgoal = view.findViewById<ImageView>(R.id.btn_setting)
         setgoal.setOnClickListener {
             val bottom = activity?.findViewById<BottomNavigationView>(R.id.bottom)
             bottom?.selectedItemId = R.id.mypage
         }
 
+        val run = view.findViewById<ImageView>(R.id.btn_daily)
+
+        run.setOnClickListener{
+            val intentNRC = context?.packageManager?.getLaunchIntentForPackage("com.nike.plusgps")
+            startActivity(intentNRC)
+        }
         return view
     }
 

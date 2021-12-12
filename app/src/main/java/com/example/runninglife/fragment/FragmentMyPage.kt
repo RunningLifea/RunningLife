@@ -1,15 +1,24 @@
 package com.example.runninglife.fragment
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.runninglife.MainActivity
 import com.example.runninglife.R
 import com.example.runninglife.RunningLifeApplication
+import com.example.runninglife.dao.User
 import com.example.runninglife.retrofit.DataService
+import retrofit2.Call
+import retrofit2.Response
 
 class FragmentMyPage : Fragment() {
     override fun onCreateView(
@@ -27,8 +36,8 @@ class FragmentMyPage : Fragment() {
         var check = false
 
         val nickname = RunningLifeApplication.prefs.getString("nickname", "")
-
-
+        val dist1 = RunningLifeApplication.prefs.getString("distance", "")
+        val time1 = RunningLifeApplication.prefs.getString("time", "")
 
         realName.text = nickname
         editName.text = nickname
@@ -38,11 +47,10 @@ class FragmentMyPage : Fragment() {
                 editName.visibility = View.VISIBLE;
                 realName.visibility = View.INVISIBLE
 
+
             } else {
                 check = false
-                realName.text = editName.text
-                realName.visibility = View.VISIBLE
-                editName.visibility = View.INVISIBLE;
+
             }
 
         }
@@ -55,32 +63,68 @@ class FragmentMyPage : Fragment() {
         var time = view.findViewById<TextView>(R.id.time)
         var dist: Int = Integer.parseInt(distance.text.toString())
         var t : Int = Integer.parseInt(time.text.toString())
+
+        distance.text = dist1
+        time.text = time1
         dist_neg.setOnClickListener {
             if (dist >= 1) {
                 dist -= 1
                 distance.text = dist.toString()
 
-            }
-            dist_pos.setOnClickListener {
-                dist += 1
-                distance.text = dist.toString()
+            }}
+        dist_pos.setOnClickListener {
+            dist += 1
+            distance.text = dist.toString()
             }
 
 
-        }
+
         time_neg.setOnClickListener {
             if (t >= 1) {
                 t -= 1
                 time.text = t.toString()
-
             }
-            time_pos.setOnClickListener {
-                t += 1
-                time.text = t.toString()
+            }
+        time_pos.setOnClickListener {
+            t += 1
+            time.text = t.toString()
             }
 
 
+
+
+        val complete = view.findViewById<Button>(R.id.edit_complete)
+
+        complete.setOnClickListener {
+            var user = User(editName.text.toString(), dist, t)
+
+            Toast.makeText(context, "Nickname editted : ${editName.text} \n Distance editted : $dist \n Time editted : $t ", Toast.LENGTH_SHORT).show()
+            DataService.userService.update(user, nickname).enqueue(object : retrofit2.Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    if (! response.isSuccessful) {
+                        // 실패 - 이미 존재하는 아이디
+                        editName.text = ""
+
+                    }else {
+                        RunningLifeApplication.prefs.setString("nickname", editName.text.toString())
+                        RunningLifeApplication.prefs.setString("distance", dist.toString())
+                        RunningLifeApplication.prefs.setString("time", t.toString())
+
+                        realName.text = editName.text
+                        realName.visibility = View.VISIBLE
+                        editName.visibility = View.INVISIBLE;
+
+                    }
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    Log.d("test", "failure")
+                }
+
+            })
         }
+
         return view
     }
+
 }

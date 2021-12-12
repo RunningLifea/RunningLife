@@ -6,14 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.runninglife.dao.User
 import com.example.runninglife.retrofit.DataService
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.converter.scalars.ScalarsConverterFactory
+
 import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
@@ -87,7 +86,6 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
             })
-
 
 
         }

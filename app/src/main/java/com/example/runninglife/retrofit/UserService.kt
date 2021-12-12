@@ -15,4 +15,7 @@ interface UserService {
 
     @GET("user/findByName")
     fun findByName(@Query("name") name:String) : Call<User>
+
+    @POST("user/update")
+    fun update(@Body user:User, @Query("name") name:String):Call<Unit>
 }

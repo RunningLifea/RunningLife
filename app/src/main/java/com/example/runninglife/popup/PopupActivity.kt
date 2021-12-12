@@ -85,31 +85,6 @@ class PopupActivity : Activity() {
                 val start = "${df.format(start_hour.selectedItem)}:${df.format(start_min.selectedItem)}"
                 val end = "${df.format(end_hour.selectedItem)}:${df.format(end_min.selectedItem)}"
 
-                // unixtime
-                val uniTime =  SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(date.toString()).time.toString()
-
-                finish()
-
-                // 시간 별 날씨 불러오기
-                val APPID = "216f63e517f56ad4f20ba181f5bb04f5"
-                val url = "https://api.openweathermap.org/"
-                val retrofit = Retrofit.Builder()
-                    .baseUrl(url)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                val weatherService = retrofit.create(WeatherService::class.java)
-
-                Thread(Runnable {
-                    kotlin.run () {
-                        Log.d("test",
-                            weatherService.getHourlyTemperature(lat, lon, uniTime, APPID).execute().body()
-                                .toString()
-                        )
-                    }
-                }).start()
-
-                Thread.sleep(1000)
-
                 val day = Day(text.text.toString(),  start, end, date.toString(), location.text.toString())
 
                 DataService.dayService.upload(day, nickname).enqueue(object : Callback<Day>{

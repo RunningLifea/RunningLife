@@ -219,6 +219,7 @@ class DailyExpandableAdapter(private val dailyList: List<Daily>) :
                                     edit_end_time = "${df.format(edit_end_hour.selectedItem)}:${
                                         df.format(edit_end_min.selectedItem)
                                     }"
+                                    btn_setting.setImageResource(R.drawable.setting)
                                     text_expand_title.text = daily.name
                                     text_location.text = edit_daily_location.text.toString()
                                     text_location.visibility = View.VISIBLE

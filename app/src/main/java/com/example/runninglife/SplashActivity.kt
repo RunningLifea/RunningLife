@@ -30,7 +30,6 @@ class SplashActivity : AppCompatActivity() {
         splashText.animation = slowly_appear
 
 
-        RunningLifeApplication.prefs.setString("nickname", "LeeYoo")
         val nickname = RunningLifeApplication.prefs.getString("nickname", "")
 
         if (nickname != "") {

@@ -20,4 +20,8 @@ interface DayService {
 
     @POST("/day/complete")
     fun complete(@Body day:Day, @Query("name") name : String) : Call<Day>
+
+    @GET("/day/temperature")
+    fun getTemp(@Query("datetime") datetime: String): Call<Int>
+
 }

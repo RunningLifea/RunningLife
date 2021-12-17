@@ -24,6 +24,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 
+
 class PopupActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,8 +85,19 @@ class PopupActivity : Activity() {
             } else {
                 val start = "${df.format(start_hour.selectedItem)}:${df.format(start_min.selectedItem)}"
                 val end = "${df.format(end_hour.selectedItem)}:${df.format(end_min.selectedItem)}"
+                var temp = 0
+                Thread(Runnable {
+                    kotlin.run () {
+                        temp = DataService.dayService.getTemp(date.toString() + start).execute().body() as Int
+                    }
+                }).start()
 
-                val day = Day(text.text.toString(),  start, end, date.toString(), location.text.toString())
+                Thread.sleep(500)
+
+                val day = Day(text.text.toString(),  start, end, date.toString(), location.text.toString(),temp)
+
+                Log.d("test", day.toString())
+
 
                 DataService.dayService.upload(day, nickname).enqueue(object : Callback<Day>{
                     override fun onResponse(call: Call<Day>, response: Response<Day>) {

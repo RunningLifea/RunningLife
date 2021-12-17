@@ -37,7 +37,7 @@ class FragmentMonthly : Fragment() {
     private lateinit var datalist: List<Record>
     private lateinit var nickname : String
     private lateinit var datelist : ArrayList<LocalDate>
-
+//Running으로 일정 등록 하면 온도 뜨게 함.
     private val df = DecimalFormat("00")
 
     private val distance = RunningLifeApplication.prefs.getString("distance","0").toInt()

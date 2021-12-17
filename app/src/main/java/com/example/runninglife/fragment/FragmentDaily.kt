@@ -356,35 +356,45 @@ class FragmentDaily : Fragment() {
                     text_location.text = result_loc[result_loc.size-3] + ", " + result_loc[result_loc.size-2]
 
                     val weather = it.weather.get(index = 0).main
+                    val cheering = view?.findViewById<TextView>(R.id.daily_hello)
 
                     when (weather.toString()) {
                         "Clouds" -> {
                             img_weather.setImageResource(R.drawable.clouds)
-                            text_weather.text = "Clouds"
+                            text_weather.text = "Cloudy"
+                            cheering?.text ="Running in spare time!"
                         }
+                        //현영이가 할일은 날씨가 맑을 때 러닝하라고 알려주는 메세지 띄우기!
+
                         "Clear" -> {
                             img_weather.setImageResource(R.drawable.clear)
                             text_weather.text = "Clear"
+                            cheering?.text = "Nice weather for running!!!"
                         }
                         "Haze", "Mist", "Smoke", "Dust", "Fog", "Sand", "Ash", "Squall", "Tornado" ,"Atmosphere" -> {
                             img_weather.setImageResource(R.drawable.atmosphere)
                             text_weather.text = "Atmosphere"
+                            cheering?.text = "Check the air condition!"
                         }
                         "Drizzle" -> {
                             img_weather.setImageResource(R.drawable.drizzle)
                             text_weather.text = "Drizzle"
+                            cheering?.text = "Cheer up today!"
                         }
                         "Rain" -> {
                             img_weather.setImageResource(R.drawable.rain)
                             text_weather.text = "Rain"
+                            cheering?.text = "Staying home with hardworking!"
                         }
                         "Snow" -> {
                             img_weather.setImageResource(R.drawable.snow)
                             text_weather.text = "Snow"
+                            cheering?.text = "White day, Nice day"
                         }
                         "Thunderstorm" -> {
                             img_weather.setImageResource(R.drawable.thunderstrom)
                             text_weather.text = "Thunderstorm"
+                            cheering?.text = "Passionate as thunder!"
                         }
                         else -> {
                             img_weather.setImageResource(R.drawable.loading)
